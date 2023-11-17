@@ -16,15 +16,18 @@ const outputConvertedAmountPerWeightText = document.querySelector('.gold-price-c
 
 let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue, outputToWeightTextValue, outputRealWeightTextValue, outputAmountNumberTextValue, outputAmountWordTextValue, outputConvertedAmountTextValue, outputConvertedAmountPerWeightTextValue;
 
-inputWeightFromUnitValue = inputWeightFromUnit.value;
-inputWeightToUnitValue = inputWeightToUnit.value;
-inputPercentageValue = inputPercentage.value;
+inputWeightFromUnitValue = Number(inputWeightFromUnit.value);
+inputWeightToUnitValue = Number(inputWeightToUnit.value);
+inputPercentageValue = Number(inputPercentage.value);
+inputGoldPriceValue = Number(inputGoldPrice.value);
+inputFeeValue = Number(inputFee.value);
 
 inputWeight.addEventListener('input', function(e) {
     inputWeightValue = `${e.target.value}`;
     weightConversion();
     console.log(inputPercentageValue);
     realWeight();
+    amount();
 });
 
 inputWeightFromUnit.addEventListener('change', function(e) {
@@ -32,25 +35,30 @@ inputWeightFromUnit.addEventListener('change', function(e) {
     console.log(inputWeightFromUnitValue);
     weightConversion();
     realWeight();
+    amount();
 });
 
 inputWeightToUnit.addEventListener('change', function(e) {
     inputWeightToUnitValue = `${e.target.value}`;
     weightConversion();
     realWeight();
+    amount();
 });
 
 inputPercentage.addEventListener('input', function(e) {
     inputPercentageValue = `${e.target.value}`;
     realWeight();
+    amount();
 });
 
-inputGoldPrice.addEventListener('change', function(e) {
+inputGoldPrice.addEventListener('input', function(e) {
     inputGoldPriceValue = `${e.target.value}`;
+    amount();
 });
 
-inputFee.addEventListener('change', function(e) {
+inputFee.addEventListener('input', function(e) {
     inputFeeValue = `${e.target.value}`;
+    amount();
 });
 
 inputToCurrency.addEventListener('change', function(e) {
@@ -70,7 +78,15 @@ function weightConversion() {
 
 function realWeight() {
     console.log(inputPercentageValue);
-    outputRealWeightTextValue = outputToWeightTextValue * inputPercentageValue;
+    outputRealWeightTextValue = inputWeightValue * inputWeightFromUnitValue / 3.75 * inputPercentageValue * 0.01;
     outputRealWeightText.textContent = outputRealWeightTextValue.toString();
+}
+
+function amount() {
+    console.log(inputGoldPriceValue);
+    console.log(outputRealWeightTextValue);
+    console.log(inputFeeValue);
+    outputAmountNumberTextValue = inputGoldPriceValue * outputRealWeightTextValue + inputFeeValue;
+    outputAmountNumberText.textContent = outputAmountNumberTextValue.toString();
 }
 
