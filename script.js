@@ -16,6 +16,9 @@ const outputConvertedAmountPerWeightText = document.querySelector('.gold-price-c
 
 let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue;
 
+inputWeightFromUnitValue = 3.75;
+inputWeightToUnitValue = 1;
+
 inputWeight.addEventListener('input', function(e) {
    inputWeightValue = `${e.target.value}`;
    weightConversion();
@@ -55,5 +58,6 @@ inputExchangeRate.addEventListener('change', function(e) {
 function weightConversion() {
     console.log(inputWeightFromUnitValue);
     console.log(inputWeightToUnitValue);
-    outputToWeightText.innerHTML = inputWeightValue;
+    outputToWeightText.textContent = (inputWeightValue * inputWeightFromUnitValue / inputWeightToUnitValue).toString();
 }
+
