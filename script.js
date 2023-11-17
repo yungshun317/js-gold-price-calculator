@@ -11,6 +11,49 @@ const outputToWeightText = document.querySelector('.gold-price-calculator__to-we
 const outputRealWeightText = document.querySelector('.gold-price-calculator__real-weight-text');
 const outputAmountNumberText = document.querySelector('.gold-price-calculator__amount-number-text');
 const outputAmountWordText = document.querySelector('.gold-price-calculator__amount-word-text');
-const convertedAmountText = document.querySelector('.gold-price-calculator__converted-amount-text');
-const convertedAmountPerWeightText = document.querySelector('.gold-price-calculator__converted-amount-per-weight-text');
+const outputConvertedAmountText = document.querySelector('.gold-price-calculator__converted-amount-text');
+const outputConvertedAmountPerWeightText = document.querySelector('.gold-price-calculator__converted-amount-per-weight-text');
 
+let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue;
+
+inputWeight.addEventListener('input', function(e) {
+   inputWeightValue = `${e.target.value}`;
+   weightConversion();
+});
+
+inputWeightFromUnit.addEventListener('change', function(e) {
+    inputWeightFromUnitValue = `${e.target.value}`;
+    console.log(inputWeightFromUnitValue);
+    weightConversion();
+});
+
+inputWeightToUnit.addEventListener('change', function(e) {
+    inputWeightToUnitValue = `${e.target.value}`;
+    weightConversion();
+});
+
+inputPercentage.addEventListener('change', function(e) {
+    inputPercentageValue = `${e.target.value}`;
+});
+
+inputGoldPrice.addEventListener('change', function(e) {
+    inputGoldPriceValue = `${e.target.value}`;
+});
+
+inputFee.addEventListener('change', function(e) {
+    inputFeeValue = `${e.target.value}`;
+});
+
+inputToCurrency.addEventListener('change', function(e) {
+    inputToCurrencyValue = `${e.target.value}`;
+});
+
+inputExchangeRate.addEventListener('change', function(e) {
+    inputExchangeRateValue = `${e.target.value}`;
+});
+
+function weightConversion() {
+    console.log(inputWeightFromUnitValue);
+    console.log(inputWeightToUnitValue);
+    outputToWeightText.innerHTML = inputWeightValue;
+}
