@@ -14,29 +14,35 @@ const outputAmountWordText = document.querySelector('.gold-price-calculator__amo
 const outputConvertedAmountText = document.querySelector('.gold-price-calculator__converted-amount-text');
 const outputConvertedAmountPerWeightText = document.querySelector('.gold-price-calculator__converted-amount-per-weight-text');
 
-let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue;
+let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue, outputToWeightTextValue, outputRealWeightTextValue, outputAmountNumberTextValue, outputAmountWordTextValue, outputConvertedAmountTextValue, outputConvertedAmountPerWeightTextValue;
 
-inputWeightFromUnitValue = 3.75;
-inputWeightToUnitValue = 1;
+inputWeightFromUnitValue = inputWeightFromUnit.value;
+inputWeightToUnitValue = inputWeightToUnit.value;
+inputPercentageValue = inputPercentage.value;
 
 inputWeight.addEventListener('input', function(e) {
-   inputWeightValue = `${e.target.value}`;
-   weightConversion();
+    inputWeightValue = `${e.target.value}`;
+    weightConversion();
+    console.log(inputPercentageValue);
+    realWeight();
 });
 
 inputWeightFromUnit.addEventListener('change', function(e) {
     inputWeightFromUnitValue = `${e.target.value}`;
     console.log(inputWeightFromUnitValue);
     weightConversion();
+    realWeight();
 });
 
 inputWeightToUnit.addEventListener('change', function(e) {
     inputWeightToUnitValue = `${e.target.value}`;
     weightConversion();
+    realWeight();
 });
 
-inputPercentage.addEventListener('change', function(e) {
+inputPercentage.addEventListener('input', function(e) {
     inputPercentageValue = `${e.target.value}`;
+    realWeight();
 });
 
 inputGoldPrice.addEventListener('change', function(e) {
@@ -58,6 +64,13 @@ inputExchangeRate.addEventListener('change', function(e) {
 function weightConversion() {
     console.log(inputWeightFromUnitValue);
     console.log(inputWeightToUnitValue);
-    outputToWeightText.textContent = (inputWeightValue * inputWeightFromUnitValue / inputWeightToUnitValue).toString();
+    outputToWeightTextValue = inputWeightValue * inputWeightFromUnitValue / inputWeightToUnitValue;
+    outputToWeightText.textContent = outputToWeightTextValue.toString();
+}
+
+function realWeight() {
+    console.log(inputPercentageValue);
+    outputRealWeightTextValue = outputToWeightTextValue * inputPercentageValue;
+    outputRealWeightText.textContent = outputRealWeightTextValue.toString();
 }
 
