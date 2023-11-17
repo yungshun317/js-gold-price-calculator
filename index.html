@@ -12,9 +12,9 @@
     <section class="section-gold-price-calculator">
       <div class="gold-price-calculator">
         <div class="gold-price-calculator__weight">
-          <label class="gold-price-calculator__label-weight" for="weight">重量</label>
-          <input type="text" class="gold-price-calculator__input-weight" placeholder="0" id="weight">
-          <select class="gold-price-calculator__select-weight-from-unit">
+          <label class="gold-price-calculator__weight-label" for="weight">重量</label>
+          <input type="text" class="gold-price-calculator__weight-input" placeholder="0" id="weight">
+          <select class="gold-price-calculator__weight-from-unit-select">
             <option value="台錢">台錢</option>
             <option value="台兩">台兩</option>
             <option value="公克">公克</option>
@@ -29,8 +29,8 @@
           </select>
         </div>
         <div class="gold-price-calculator__weight-to-unit">
-          <label class="gold-price-calculator__label-weight-to-unit" for="weight-to-unit">重量</label>
-          <select class="gold-price-calculator__select-weight-to-unit" id="weight-to-unit">
+          <label class="gold-price-calculator__weight-to-unit-label" for="weight-to-unit">重量</label>
+          <select class="gold-price-calculator__weight-to-unit-select" id="weight-to-unit">
             <option value="台錢">台錢</option>
             <option value="台兩">台兩</option>
             <option value="公克">公克</option>
@@ -45,8 +45,60 @@
           </select>
         </div>
         <div class="gold-price-calculator__to-weight">
-          <label class="gold-price-calculator__label-to-weight">換算重量</label>
-          <p class="gold-price-calculator__text-to-weight"></p>
+          <label class="gold-price-calculator__to-weight-label">換算重量</label>
+          <p class="gold-price-calculator__to-weight-text"></p>
+        </div>
+
+        <div class="gold-price-calculator__percentage">
+          <label class="gold-price-calculator__percentage-label" for="percentage">成色 / 比例</label>
+          <input type="text" class="gold-price-calculator__percentage-input" placeholder="100" id="percentage"><span class="gold-price-calculator__input-percentage-symbol">％</span>
+        </div>
+        <div class="gold-price-calculator__real-weight">
+          <label class="gold-price-calculator__real-weight-label">實重</label>
+          <p class="gold-price-calculator__real-weight-text-"></p>
+        </div>
+
+        <div class="gold-price-calculator__gold-price">
+          <label class="gold-price-calculator__gold-price-label" for="gold-price">1台錢 / 價格</label>
+          <input type="text" class="gold-price-calculator__gold-price-input" placeholder="100" id="gold-price">
+        </div>
+
+        <div class="gold-price-calculator__fee">
+          <label class="gold-price-calculator__fee-label" for="fee">工資或售價</label>
+          <input type="text" class="gold-price-calculator__fee-input" placeholder="100" id="fee">
+        </div>
+
+        <div class="gold-price-calculator__amount">
+          <label class="gold-price-calculator__amount-label">合計金額</label>
+          <div class="gold-price-calculator__amount-text-box">
+            <p class="gold-price-calculator__amount-text-number">NT$0</p>
+            <p class="gold-price-calculator__amount-text-word">0</p>
+          </div>
+        </div>
+
+        <div class="gold-price-calculator__to-currency">
+          <label class="gold-price-calculator__to-currency-label" for="currency">台幣換算幣別</label>
+          <select class="gold-price-calculator__to-currency-select" id="currency">
+            <option value="台幣">台幣 (NT)</option>
+            <option value="美元">美元 (USD)</option>
+            <option value="人民幣">人民幣 (CNY)</option>
+            <option value="歐元">歐元 (EUR)</option>
+          </select>
+        </div>
+
+        <div class="gold-price-calculator__exchange-rate">
+          <label class="gold-price-calculator__exchange-rate-label" for="exchange-rate">台幣 (NT) 匯率</label>
+          <input type="text" class="gold-price-calculator__exchange-rate-input" placeholder="1" id="exchange-rate">
+        </div>
+
+        <div class="gold-price-calculator__converted-amount">
+          <label class="gold-price-calculator__converted-amount-label">台幣 (NT) 合計價格</label>
+          <p class="gold-price-calculator__converted-amount-text"></p>
+        </div>
+
+        <div class="gold-price-calculator__converted-amount-per-weight">
+          <label class="gold-price-calculator__converted-amount-per-weight-label">每台錢 / 台幣 (NT)</label>
+          <p class="gold-price-calculator__converted-amount-per-weight-text"></p>
         </div>
       </div>
     </section>
