@@ -22,6 +22,8 @@ inputWeightToUnitValue = Number(inputWeightToUnit.value);
 inputPercentageValue = Number(inputPercentage.value);
 inputGoldPriceValue = Number(inputGoldPrice.value);
 inputFeeValue = Number(inputFee.value);
+inputToCurrencyValue = Number(inputToCurrency.value);
+inputExchangeRateValue = Number(inputExchangeRate.value);
 
 inputWeight.addEventListener('input', function(e) {
     inputWeightValue = Number(e.target.value);
@@ -29,6 +31,7 @@ inputWeight.addEventListener('input', function(e) {
     console.log(inputPercentageValue);
     realWeight();
     amount();
+    convertedAmount()
 });
 
 inputWeightFromUnit.addEventListener('change', function(e) {
@@ -37,6 +40,7 @@ inputWeightFromUnit.addEventListener('change', function(e) {
     weightConversion();
     realWeight();
     amount();
+    convertedAmount()
 });
 
 inputWeightToUnit.addEventListener('change', function(e) {
@@ -44,6 +48,7 @@ inputWeightToUnit.addEventListener('change', function(e) {
     weightConversion();
     realWeight();
     amount();
+    convertedAmount()
 });
 
 inputPercentage.addEventListener('input', function(e) {
@@ -51,6 +56,7 @@ inputPercentage.addEventListener('input', function(e) {
     weightConversion();
     realWeight();
     amount();
+    convertedAmount()
 });
 
 inputGoldPrice.addEventListener('input', function(e) {
@@ -58,6 +64,7 @@ inputGoldPrice.addEventListener('input', function(e) {
     weightConversion();
     realWeight();
     amount();
+    convertedAmount()
 });
 
 inputFee.addEventListener('input', function(e) {
@@ -65,14 +72,25 @@ inputFee.addEventListener('input', function(e) {
     weightConversion();
     realWeight();
     amount();
+    convertedAmount()
 });
 
 inputToCurrency.addEventListener('change', function(e) {
-    inputToCurrencyValue = e.target.value;
+    inputToCurrencyValue = Number(e.target.value);
+    inputExchangeRateValue = inputToCurrencyValue;
+    inputExchangeRate.value = inputExchangeRateValue;
+    weightConversion();
+    realWeight();
+    amount();
+    convertedAmount()
 });
 
-inputExchangeRate.addEventListener('change', function(e) {
-    inputExchangeRateValue = e.target.value;
+inputExchangeRate.addEventListener('input', function(e) {
+    inputExchangeRateValue = Number(e.target.value);
+    weightConversion();
+    realWeight();
+    amount();
+    convertedAmount()
 });
 
 function weightConversion() {
@@ -94,8 +112,12 @@ function amount() {
     console.log(inputFeeValue);
     outputAmountNumberTextValue = inputGoldPriceValue * outputRealWeightTextValue + inputFeeValue;
     outputAmountNumberText.textContent = 'NT$' + outputAmountNumberTextValue.toString();
-    console.log(constructAmountWord(outputAmountNumberTextValue));
-    outputAmountWordText.textContent = constructAmountWord(outputAmountNumberTextValue);
+    outputAmountWordText.textContent = convertNumberToWord(outputAmountNumberTextValue);
+}
+
+function convertedAmount() {
+    outputConvertedAmountTextValue = outputAmountNumberTextValue / inputExchangeRateValue;
+    outputConvertedAmountText.textContent = outputConvertedAmountTextValue.toString() + inputToCurrency.options[inputToCurrency.selectedIndex].text;
 }
 
 function convertDigitToChar(digit) {
@@ -138,7 +160,7 @@ function convertDigitToChar(digit) {
     return char;
 }
 
-function constructAmountWord(num) {
+function convertNumberToWord(num) {
     let word = '';
 
     if (num >= 100000000) {
