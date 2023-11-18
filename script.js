@@ -18,7 +18,7 @@ const outputAmountWordText = document.querySelector('.gold-price-calculator__amo
 const outputConvertedAmountText = document.querySelector('.gold-price-calculator__converted-amount-text');
 const outputConvertedAmountPerWeightText = document.querySelector('.gold-price-calculator__converted-amount-per-weight-text');
 
-let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue, outputToWeightTextValue, outputRealWeightTextValue, outputAmountNumberTextValue, outputAmountWordTextValue, outputConvertedAmountTextValue, outputConvertedAmountPerWeightTextValue;
+let inputWeightValue, inputWeightFromUnitValue, inputWeightToUnitValue, inputPercentageValue, inputGoldPriceValue, inputFeeValue, inputToCurrencyValue, inputExchangeRateValue, outputToWeightTextValue, outputRealWeightTextValue, outputAmountNumberTextValue, outputConvertedAmountTextValue, outputConvertedAmountPerWeightTextValue;
 
 inputWeightValue = Number(inputWeight.value);
 inputWeightFromUnitValue = Number(inputWeightFromUnit.value);
@@ -32,7 +32,6 @@ inputExchangeRateValue = Number(inputExchangeRate.value);
 inputWeight.addEventListener('input', function(e) {
     inputWeightValue = Number(e.target.value);
     weightConversion();
-    console.log(inputPercentageValue);
     realWeight();
     amount();
     convertedAmount()
@@ -40,7 +39,6 @@ inputWeight.addEventListener('input', function(e) {
 
 inputWeightFromUnit.addEventListener('change', function(e) {
     inputWeightFromUnitValue = Number(e.target.value);
-    console.log(inputWeightFromUnitValue);
     weightConversion();
     realWeight();
     amount();
@@ -102,22 +100,16 @@ inputExchangeRate.addEventListener('input', function(e) {
 });
 
 function weightConversion() {
-    console.log(inputWeightFromUnitValue);
-    console.log(inputWeightToUnitValue);
     outputToWeightTextValue = inputWeightValue * inputWeightFromUnitValue / inputWeightToUnitValue;
     outputToWeightText.textContent = outputToWeightTextValue.toString() + inputWeightToUnit.options[inputWeightToUnit.selectedIndex].text;
 }
 
 function realWeight() {
-    console.log(inputPercentageValue);
     outputRealWeightTextValue = inputWeightValue * inputWeightFromUnitValue / 3.75 * inputPercentageValue * 0.01;
     outputRealWeightText.textContent = outputRealWeightTextValue.toString() + '台錢';
 }
 
 function amount() {
-    console.log(inputGoldPriceValue);
-    console.log(outputRealWeightTextValue);
-    console.log(inputFeeValue);
     outputAmountNumberTextValue = inputGoldPriceValue * outputRealWeightTextValue + inputFeeValue;
     outputAmountNumberText.textContent = 'NT$' + outputAmountNumberTextValue.toString();
     outputAmountWordText.textContent = convertNumberToWord(outputAmountNumberTextValue);
@@ -181,16 +173,13 @@ function convertNumberToWord(num) {
     if (num >= 100000000) {
 
         if (num >= 100000000000) {
-            // word += convertDigitToChar(Math.floor(num / 10000000)) + '仟';
             word += Math.floor(num / 100000000000) !== 0 ? convertDigitToChar(Math.floor(num / 100000000000)) + '仟' : '零';
             num = num % 100000000000;
-            console.log(num + 'wh');
         } else {
             word += (Math.floor(num / 100000000000) !== 0) && (Math.floor(num / 10000000000) !== 0) && (Math.floor(num / 1000000000) !== 0) ? '零' : '';
         }
 
         if (num >= 10000000000) {
-            // word += convertDigitToChar(Math.floor(num / 1000000)) + '佰';
             word += Math.floor(num / 10000000000) !== 0 ? convertDigitToChar(Math.floor(num / 10000000000)) + '佰' : '零';
             num = num % 10000000000;
         } else {
@@ -198,36 +187,26 @@ function convertNumberToWord(num) {
         }
 
         if (num >= 1000000000) {
-            // word += convertDigitToChar(Math.floor(num / 100000)) + '拾';
-            console.log(num + '?');
             word += Math.floor(num / 1000000000) !== 0 ? convertDigitToChar(Math.floor(num / 1000000000)) + '拾' : '零';
             num = num % 1000000000;
         } else {
             word += Math.floor(num / 1000000000) !== 0 ? '零' : '';
         }
 
-        // word += convertDigitToChar(Math.floor(num / 100000000)) + '億';
         word += Math.floor(num / 100000000) !== 0 ? convertDigitToChar(Math.floor(num / 100000000)) : '';
         word += '億';
         num = num % 100000000;
     }
 
     if (num >= 10000) {
-        console.log(num + 'log2');
-
         if (num >= 10000000) {
-            // word += convertDigitToChar(Math.floor(num / 10000000)) + '仟';
             word += Math.floor(num / 10000000) !== 0 ? convertDigitToChar(Math.floor(num / 10000000)) + '仟' : '零';
             num = num % 10000000;
-            console.log(num + 'wh');
         } else {
-            console.log(num + 'zero');
-            console.log( (Math.floor(num / 100000) !== 0) && (Math.floor(num / 10000) !== 0));
             word += (Math.floor(num / 10000000) !== 0) && (Math.floor(num / 1000000) !== 0) && (Math.floor(num / 100000) !== 0) ? '零' : '';
         }
 
         if (num >= 1000000) {
-            // word += convertDigitToChar(Math.floor(num / 1000000)) + '佰';
             word += Math.floor(num / 1000000) !== 0 ? convertDigitToChar(Math.floor(num / 1000000)) + '佰' : '零';
             num = num % 1000000;
         } else {
@@ -235,23 +214,18 @@ function convertNumberToWord(num) {
         }
 
         if (num >= 100000) {
-            // word += convertDigitToChar(Math.floor(num / 100000)) + '拾';
-            console.log(num + '?');
             word += Math.floor(num / 100000) !== 0 ? convertDigitToChar(Math.floor(num / 100000)) + '拾' : '零';
             num = num % 100000;
         } else {
             word += Math.floor(num / 100000) !== 0 ? '零' : '';
         }
 
-        console.log(num + 'be');
         word += Math.floor(num / 10000) !== 0 ? convertDigitToChar(Math.floor(num / 10000)) : '';
         word += '萬';
         num = num % 10000;
     }
 
     if (num >= 1000) {
-        // word += convertDigitToChar(Math.floor(num / 1000)) + '仟';
-        console.log(num + 'thou')
         word += Math.floor(num / 1000) !== 0 ? convertDigitToChar(Math.floor(num / 1000)) + '仟' : '零';
         num = num % 1000;
     } else {
@@ -259,7 +233,6 @@ function convertNumberToWord(num) {
     }
 
     if (num >= 100) {
-        // word += convertDigitToChar(Math.floor(num / 100)) + '佰';
         word += Math.floor(num / 100) !== 0 ? convertDigitToChar(Math.floor(num / 100)) + '佰' : '零';
         num = num % 100;
     } else {
@@ -267,7 +240,6 @@ function convertNumberToWord(num) {
     }
 
     if (num >= 10) {
-        // word += convertDigitToChar(Math.floor(num / 10)) + '拾';
         word += Math.floor(num / 10) !== 0 ? convertDigitToChar(Math.floor(num / 10)) + '拾' : '零';
         num = num % 10;
     } else {
