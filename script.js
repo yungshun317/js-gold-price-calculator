@@ -1,3 +1,7 @@
+const labelExchangeRate = document.querySelector('.gold-price-calculator__exchange-rate-label');
+const labelConvertedAmount = document.querySelector('.gold-price-calculator__converted-amount-label');
+const labelConvertedAmountPerWeight = document.querySelector('.gold-price-calculator__converted-amount-per-weight-label');
+
 const inputWeight = document.querySelector('.gold-price-calculator__weight-input');
 const inputWeightFromUnit = document.querySelector('.gold-price-calculator__weight-from-unit-select');
 const inputWeightToUnit = document.querySelector('.gold-price-calculator__weight-to-unit-select');
@@ -45,6 +49,7 @@ inputWeightFromUnit.addEventListener('change', function(e) {
 
 inputWeightToUnit.addEventListener('change', function(e) {
     inputWeightToUnitValue = Number(e.target.value);
+    labelConvertedAmountPerWeight.textContent = '每' + inputWeightToUnit.options[inputWeightToUnit.selectedIndex].text + '/' + inputToCurrency.options[inputToCurrency.selectedIndex].text;
     weightConversion();
     realWeight();
     amount();
@@ -79,6 +84,9 @@ inputToCurrency.addEventListener('change', function(e) {
     inputToCurrencyValue = Number(e.target.value);
     inputExchangeRateValue = inputToCurrencyValue;
     inputExchangeRate.value = inputExchangeRateValue;
+    labelExchangeRate.textContent = inputToCurrency.options[inputToCurrency.selectedIndex].text + '匯率';
+    labelConvertedAmount.textContent = inputToCurrency.options[inputToCurrency.selectedIndex].text + '合計價格';
+    labelConvertedAmountPerWeight.textContent = '每' + inputWeightToUnit.options[inputWeightToUnit.selectedIndex].text + '/' + inputToCurrency.options[inputToCurrency.selectedIndex].text;
     weightConversion();
     realWeight();
     amount();
@@ -117,7 +125,10 @@ function amount() {
 
 function convertedAmount() {
     outputConvertedAmountTextValue = outputAmountNumberTextValue / inputExchangeRateValue;
-    outputConvertedAmountText.textContent = outputConvertedAmountTextValue.toString() + inputToCurrency.options[inputToCurrency.selectedIndex].text;
+    outputConvertedAmountText.textContent = outputConvertedAmountTextValue.toString();
+
+    outputConvertedAmountPerWeightTextValue = outputConvertedAmountTextValue / outputToWeightTextValue;
+    outputConvertedAmountPerWeightText.textContent = outputConvertedAmountPerWeightTextValue.toString();
 }
 
 function convertDigitToChar(digit) {
