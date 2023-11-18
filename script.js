@@ -174,10 +174,42 @@ function convertDigitToChar(digit) {
 function convertNumberToWord(num) {
     let word = '';
 
+    if (num >= 1000000000000) {
+        return '大於一兆';
+    }
+
     if (num >= 100000000) {
-        word += convertDigitToChar(Math.floor(num / 100000000)) + '億';
+
+        if (num >= 100000000000) {
+            // word += convertDigitToChar(Math.floor(num / 10000000)) + '仟';
+            word += Math.floor(num / 100000000000) !== 0 ? convertDigitToChar(Math.floor(num / 100000000000)) + '仟' : '零';
+            num = num % 100000000000;
+            console.log(num + 'wh');
+        } else {
+            word += (Math.floor(num / 100000000000) !== 0) && (Math.floor(num / 10000000000) !== 0) && (Math.floor(num / 1000000000) !== 0) ? '零' : '';
+        }
+
+        if (num >= 10000000000) {
+            // word += convertDigitToChar(Math.floor(num / 1000000)) + '佰';
+            word += Math.floor(num / 10000000000) !== 0 ? convertDigitToChar(Math.floor(num / 10000000000)) + '佰' : '零';
+            num = num % 10000000000;
+        } else {
+            word += (Math.floor(num / 10000000000) !== 0) && (Math.floor(num / 1000000000) !== 0) ? '零' : '';
+        }
+
+        if (num >= 1000000000) {
+            // word += convertDigitToChar(Math.floor(num / 100000)) + '拾';
+            console.log(num + '?');
+            word += Math.floor(num / 1000000000) !== 0 ? convertDigitToChar(Math.floor(num / 1000000000)) + '拾' : '零';
+            num = num % 1000000000;
+        } else {
+            word += Math.floor(num / 1000000000) !== 0 ? '零' : '';
+        }
+
+        // word += convertDigitToChar(Math.floor(num / 100000000)) + '億';
+        word += Math.floor(num / 100000000) !== 0 ? convertDigitToChar(Math.floor(num / 100000000)) : '';
+        word += '億';
         num = num % 100000000;
-        console.log(num + 'log1');
     }
 
     if (num >= 10000) {
@@ -189,7 +221,9 @@ function convertNumberToWord(num) {
             num = num % 10000000;
             console.log(num + 'wh');
         } else {
-            word += (Math.floor(num / 1000000) !== 0) && (Math.floor(num / 100000) !== 0) && (Math.floor(num / 10000) !== 0) ? '零' : '';
+            console.log(num + 'zero');
+            console.log( (Math.floor(num / 100000) !== 0) && (Math.floor(num / 10000) !== 0));
+            word += (Math.floor(num / 10000000) !== 0) && (Math.floor(num / 1000000) !== 0) && (Math.floor(num / 100000) !== 0) ? '零' : '';
         }
 
         if (num >= 1000000) {
@@ -197,7 +231,7 @@ function convertNumberToWord(num) {
             word += Math.floor(num / 1000000) !== 0 ? convertDigitToChar(Math.floor(num / 1000000)) + '佰' : '零';
             num = num % 1000000;
         } else {
-            word += (Math.floor(num / 100000) !== 0) && (Math.floor(num / 10000) !== 0) ? '零' : '';
+            word += (Math.floor(num / 1000000) !== 0) && (Math.floor(num / 100000) !== 0) ? '零' : '';
         }
 
         if (num >= 100000) {
@@ -206,7 +240,7 @@ function convertNumberToWord(num) {
             word += Math.floor(num / 100000) !== 0 ? convertDigitToChar(Math.floor(num / 100000)) + '拾' : '零';
             num = num % 100000;
         } else {
-            word += Math.floor(num / 10000) !== 0 ? '零' : '';
+            word += Math.floor(num / 100000) !== 0 ? '零' : '';
         }
 
         console.log(num + 'be');
@@ -221,7 +255,7 @@ function convertNumberToWord(num) {
         word += Math.floor(num / 1000) !== 0 ? convertDigitToChar(Math.floor(num / 1000)) + '仟' : '零';
         num = num % 1000;
     } else {
-        word += Math.floor(num / 100) !== 0 ? '零' : '';
+        word += Math.floor(num / 1000) !== 0 ? '零' : '';
     }
 
     if (num >= 100) {
@@ -229,7 +263,7 @@ function convertNumberToWord(num) {
         word += Math.floor(num / 100) !== 0 ? convertDigitToChar(Math.floor(num / 100)) + '佰' : '零';
         num = num % 100;
     } else {
-        word += Math.floor(num / 10) !== 0 ? '零' : '';
+        word += Math.floor(num / 100) !== 0 ? '零' : '';
     }
 
     if (num >= 10) {
@@ -237,10 +271,11 @@ function convertNumberToWord(num) {
         word += Math.floor(num / 10) !== 0 ? convertDigitToChar(Math.floor(num / 10)) + '拾' : '零';
         num = num % 10;
     } else {
-        word += '';
+        word += Math.floor(num / 10) !== 0 ? '零' : '';
     }
 
-    word += convertDigitToChar(Math.floor(num));
+    word += Math.floor(num) !== 0 ? convertDigitToChar(Math.floor(num)) : '';
+    word += '元';
 
     return word;
 }
